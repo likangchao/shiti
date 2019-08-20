@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>传智播客 - 黑马程序员</title>
+  <link href="../public/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="../public/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">传智播客 - 黑马程序员</a>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-9 col-sm-offset-1 col-md-10 col-md-offset-1 main">
+        <h2 class="sub-header">员工管理</h2>
+        <a class="btn btn-success" href="/new.html">添加员工</a>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>出生日期</th>
+                <th>入职日期</th>
+                <th>手机号码</th>
+                <th>邮箱</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="list_container">
+              <tr>
+                <td>1</td>
+                <td>Leanne Graham</td>
+                <td>男</td>
+                <td>2018-12-21</td>
+                <td>2018-12-18</td>
+                <td>12345678910</td>
+                <td>111@222.com</td>
+                <td>
+                  <a href="/update.html">编辑</a>
+                  <a href="#">删除</a>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Ervin Howell</td>
+                <td>女</td>
+                <td>2018-12-18</td>
+                <td>2018-12-18</td>
+                <td>12345678910</td>
+                <td>graham@itcast.cn</td>
+                <td>
+                  <a href="/update.html">编辑</a>
+                  <a href="#">删除</a>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Clementine Bauch</td>
+                <td>男</td>
+                <td>2018-12-18</td>
+                <td>2018-12-18</td>
+                <td>12345678910</td>
+                <td>graham@itcast.cn</td>
+                <td>
+                  <a href="/update.html">编辑</a>
+                  <a href="#">删除</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../public/vendor/jquery/jquery.js"></script>
+  <script src="../public/vendor/art-template/template-web.js"></script>
+
+  <!-- 准备一个模板 -->
+  <script id="moban" type="text/html">
+    {{each data v i}}
+    <tr>
+      <td>{{i+1}}</td>
+      <td>{{v.name}}</td>
+      <td>{{v.gender}}</td>
+      <td>{{v.birthday}}</td>
+      <td>{{v.employmentDate}}</td>
+      <td>{{v.mobilePhone}}</td>
+      <td>{{v.email}}</td>
+      <td>
+        <a href="/update.html">编辑</a>
+        <!-- 搞个自定义属性来储蓄id -->
+        <a href="#" data-id="{{v.id}}" class="delete">删除</a>
+      </td>
+    </tr>
+    {{/each}}
+  </script>
+  <script>
+    // 业务实现代码写到这里
+
+    // 入口函数
+    $(function () {
+
+      function shuaxin() {
+        // 需求:列表展示
+        // 1.一进页面就发送ajax请求,获取所有的员工信息
+        // 2.提过模板引擎渲染到页面上
+        $.ajax({
+          url: 'http://localhost:3000/employees/list',
+          success: function (backData) {
+            var shuju = template('moban', backData)
+            $('tbody').html(shuju)
+          }
+        });
+      }
+
+      shuaxin()
+
+      // 需求:点击删除按钮进行删除
+      // 因为删除按钮是动态生成的,所有要委托注册,给他们共同的父亲注册委托事件
+      $('tbody').on('click', 'a.delete', function () {
+        // 1.获取员工id
+        var id = $(this).attr('data-id');
+        console.log(id);
+        // 发送ajax请求,进行删除
+        $.ajax({
+          type: 'get',
+          // dataType: 'jsonp',
+          url: 'http://localhost:3000/employees/delete',
+          data: {
+            id: id
+          },
+          success: function (backData) {
+              alert('删除成功')
+              shuaxin();
+          }
+        })
+      });
+
+
+    })
+  </script>
+</body>
+
+</html>

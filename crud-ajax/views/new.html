@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>传智播客 - 黑马程序员</title>
+  <link href="/public/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="/public/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">传智播客 - 黑马程序员</a>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-9 col-sm-offset-1 col-md-10 col-md-offset-1 main">
+        <h2 class="sub-header">添加员工</h2>
+        <form id="form">
+          <div class="form-group">
+            <label for="name">姓名</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="gender">性别</label>
+            <div class="radio">
+              <label class="radio-inline">
+                <input type="radio" name="gender" id="inlineRadio1" value="m" required> 男
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="gender" id="inlineRadio2" value="f" required> 女
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="birthday">出生日期</label>
+            <input type="date" class="form-control" id="birthday" name="birthday" required>
+          </div>
+          <div class="form-group">
+            <label for="employmentDate">入职日期</label>
+            <input type="date" class="form-control" id="employmentDate" name="employmentDate" required>
+          </div>
+          <div class="form-group">
+            <label for="mobilePhone">手机号码</label>
+            <input type="text" class="form-control" id="mobilePhone" name="mobilePhone" required>
+          </div>
+          <div class="form-group">
+            <label for="email">邮箱</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+          <a class="btn btn-danger" href="/">取消</a>
+          <button type="submit" class="btn btn-primary">保存</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="../public/vendor/jquery/jquery.js"></script>
+  <script src="../public/vendor/art-template/template-web.js"></script>
+  <script>
+    // 业务实现代码写到这里
+    // 入口函数
+    $(function () {
+      // 需求:新增员工信息
+      // 1.给保全按钮注册点击事件
+      $('.btn-primary').on('click', function (e) {
+        e.preventDefault()
+        // 2.1发送ajax请求完成员工信息新增
+        //如果后端没有说用formData接收,那难道就只能一个个的获取值了吗?
+        //不是的,贴心的jQuery给我们提供了一个方法 serialize(); //序列化
+        var data = $('form').serialize();//可以获取form表单中带有name属性的标签的值
+        $.ajax({
+          type: 'post',
+          url: 'http://localhost:3000/employees/create',
+          data:data,
+          success: function (backData) {
+            console.log(backData);
+            
+            alert('新增成功')
+          }
+        })
+        })
+    })
+  </script>
+</body>
+
+</html>

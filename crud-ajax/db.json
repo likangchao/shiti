@@ -1,0 +1,31 @@
+{
+  "employees": [
+    {
+      "name": "李康超",
+      "gender": "m",
+      "birthday": "0008-08-08",
+      "employmentDate": "0008-08-08",
+      "mobilePhone": "12345435027",
+      "email": "lisisi@16.com",
+      "id": "ae75ed8c-1a16-4e70-bf24-c5319dc2db2c"
+    },
+    {
+      "name": "李康月",
+      "gender": "m",
+      "birthday": "0003-03-03",
+      "employmentDate": "0003-03-03",
+      "mobilePhone": "12345435027",
+      "email": "1233@qq.com",
+      "id": "85ffa2ba-9e12-43e8-8b43-2e3f5fe2e6af"
+    },
+    {
+      "name": "力气",
+      "gender": "m",
+      "birthday": "0003-03-03",
+      "employmentDate": "0003-03-03",
+      "mobilePhone": "12345435027",
+      "email": "123@qq.com",
+      "id": "8871f7f4-3414-48f3-b7c4-c43c48c90526"
+    }
+  ]
+}
