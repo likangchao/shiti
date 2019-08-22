@@ -8,8 +8,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>传智播客 - 黑马程序员</title>
-  <link href="/public/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-  <link href="/public/css/main.css" rel="stylesheet">
+  <link href="../public/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="../public/css/main.css" rel="stylesheet">
 </head>
 
 <body>
@@ -86,7 +86,7 @@
         $.ajax({
           type: 'post',
           url: 'http://localhost:3000/employees/create',
-          data:data,
+          data,
           success: function (backData) {
             console.log(backData);
             

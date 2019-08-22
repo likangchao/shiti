@@ -107,7 +107,7 @@
       <td>{{v.mobilePhone}}</td>
       <td>{{v.email}}</td>
       <td>
-        <a href="/update.html">编辑</a>
+        <a href="update.html?id={{v.id}}">编辑</a>
         <!-- 搞个自定义属性来储蓄id -->
         <a href="#" data-id="{{v.id}}" class="delete">删除</a>
       </td>
@@ -153,7 +153,8 @@
               alert('删除成功')
               shuaxin();
           }
-        })
+        });
+
       });
 
 
